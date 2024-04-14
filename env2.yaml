@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: env
+  labels:
+    app: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:1.35.0
+        command: ['sh', '-c', 'echo $ENV1 $HOSTNAME $ENV2 && sleep 3600']
+        env:
+        - name: ENV1
+          value: "watashi no namae ha "
+        - name: ENV2
+          value: " desuYO"

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: practice
+  labels:
+    app: practice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: practice
+  template:
+    metadata:
+      labels:
+        app: practice
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.23
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            name: volume
+        env:
+        - name: ENV1
+          value: Kono Container ha
+        - name: ENV2
+          value: Nginx desu
+      volumes:
+        - name: volume
+          hostPath: 
+            path: /mnt
+            type: Directory
+      
